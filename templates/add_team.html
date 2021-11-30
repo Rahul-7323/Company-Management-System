@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block title %}Register{% endblock %} {% block
+body_content %}
+<div
+  class="container w-50 bg-light bg-gradient border border-3 rounded-3"
+  style="margin-top: 30px"
+>
+  <h1>Add New Team</h1>
+  <br />
+  <form action="/add_team" method="post" name="team_form">
+    {{ form.csrf_token }}
+    <div class="mb-3">
+      {{ form.team_name.label(class="form-label") }}
+      <div class="">{{ form.team_name(class="form-control") }}</div>
+    </div>
+    <div class="mb-3">
+      {{ form.team_descr.label(class="form-label") }}
+      <div class="">{{ form.team_descr(class="form-control") }}</div>
+    </div>
+    <div class="mb-3">
+      {{ form.proj_id.label(class="form-label") }}
+      <div class="">{{ form.proj_id(class="form-select") }}</div>
+    </div>
+    <div class="mb-3">
+      {{ form.mgr_emp_id.label(class="form-label") }}
+      <div class="">{{ form.mgr_emp_id(class="form-select") }}</div>
+    </div>
+    <div>
+      <input
+        class="btn btn-primary"
+        id="submit"
+        name="submit"
+        type="submit"
+        value="Add"
+      />
+    </div>
+  </form>
+  <br />
+  {% if form.errors != {} %}
+  <div class="alert alert-danger" role="alert">{{form.errors}}</div>
+  {% endif %}
+</div>
+{% endblock %}

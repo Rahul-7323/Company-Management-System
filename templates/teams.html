@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block title %}Teams{% endblock %}} {% block
+body_content %}
+
+<div
+  class="container bg-gradient w-auto border border-3 rounded-3 shadow"
+  style="margin-top: 60px; margin-bottom: 60px"
+>
+  {% if teams == [] %}
+  <h1>There are no teams.</h1>
+  {% else %}
+  <h1 style="text-align: center">Teams</h1>
+  <br />
+  <table class="table table-hover" style="text-align: center">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Team Name</th>
+        <th scope="col">Team Description</th>
+        <th scope="col">Project Manager</th>
+        <th scope="col">Project Name</th>
+        <th scope="col">Employees</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% set i = namespace(value=1) %} {% for team in teams %}
+      <tr>
+        <th scope="row">{{ i.value }}</th>
+        <td>{{ team.team_name }}</td>
+        <td>{{ team.team_descr }}</td>
+        {% if team.mgr_emp %}
+        <td>{{ team.mgr_emp.f_name + ' ' + team.mgr_emp.l_name }}</td>
+        {% else %}
+        <td></td>
+        {% endif %} {% if team.proj %}
+        <td>{{ team.proj.proj_name }}</td>
+        {% else %}
+        <td></td>
+        {% endif %}
+        <td><a href="/teams/{{ team.team_id }}/employees">Click Here</a></td>
+        <td>
+          <a href="/team/{{ team.team_id }}/update">update</a>/<a
+            href="/team/{{ team.team_id }}/delete"
+            >delete</a
+          >
+        </td>
+      </tr>
+      {% set i.value = i.value + 1 %} {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endblock %}

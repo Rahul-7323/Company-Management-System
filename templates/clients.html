@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block title %}Clients{% endblock %}} {% block
+body_content %}
+
+<div
+  class="container bg-gradient w-auto border border-3 rounded-3 shadow"
+  style="margin-top: 60px; margin-bottom: 60px"
+>
+  {% if clts == [] %}
+  <h1>There are no clients.</h1>
+  {% else %}
+  <h1 style="text-align: center">Clients</h1>
+  <br />
+  <table class="table table-hover" style="text-align: center">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Client Name</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% set i = namespace(value=1) %} {% for clt in clts %}
+      <tr>
+        <th scope="row">{{ i.value }}</th>
+        <td>{{ clt.clt_name }}</td>
+        <td>
+          <a href="/client/{{ clt.clt_id }}/delete">delete</a>
+        </td>
+      </tr>
+      {% set i.value = i.value + 1 %} {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endblock %}

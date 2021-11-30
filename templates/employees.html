@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% block title %}Employees{% endblock %}} {% block
+body_content %}
+
+<div
+  class="container bg-gradient w-auto border border-3 rounded-3 shadow"
+  style="margin-top: 60px; margin-bottom: 60px"
+>
+  {% if emps == [] %}
+  <h1>There are no employees.</h1>
+  {% else %}
+  <h1 style="text-align: center">Employees</h1>
+  <br />
+  <table class="table table-hover" style="text-align: center">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">DOB</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Username</th>
+        <th scope="col">Department</th>
+        <th scope="col">Team</th>
+        <th scope="col">Address</th>
+        <th scope="col">Salary</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% set i = namespace(value=1) %} {% for emp in emps %}
+      <tr>
+        <th scope="row">{{ i.value }}</th>
+        <td>{{ emp.f_name }}</td>
+        <td>{{ emp.l_name }}</td>
+        <td>{{ emp.dob }}</td>
+        <td>{{ emp.gender }}</td>
+        <td>{{ emp.user.username }}</td>
+        <td>{{ emp.dept.dept_name }}</td>
+        <td>{{ emp.team.team_name }}</td>
+        <td>{{ emp.address }}</td>
+        <td>{{ emp.salary }}</td>
+        <td>
+          <a href="/employee/{{ emp.emp_id }}/update">update</a>/<a
+            href="/employee/{{ emp.emp_id }}/delete"
+            >delete</a
+          >
+        </td>
+      </tr>
+      {% set i.value = i.value + 1 %} {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endblock %}

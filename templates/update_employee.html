@@ -1,0 +1,72 @@
+{% extends "base.html" %} {% block title %}Update Employee{% endblock %} {%
+block body_content %}
+<div
+  class="container w-50 bg-light bg-gradient border border-3 rounded-3"
+  style="margin-top: 30px"
+>
+  <h1>Update Employee</h1>
+  <br />
+  <form
+    action="/employee/{{ emp_id }}/update"
+    method="post"
+    name="update_employee_form"
+  >
+    {{ form.csrf_token }}
+    <div class="mb-3">
+      {{ form.f_name.label(class="form-label") }}
+      <div class="">
+        {{ form.f_name(class="form-control", disabled = True) }}
+      </div>
+    </div>
+    <div class="mb-3">
+      {{ form.l_name.label(class="form-label") }}
+      <div class="">
+        {{ form.l_name(class="form-control", disabled = True) }}
+      </div>
+    </div>
+    <div class="mb-3">
+      {{ form.gender.label(class="form-label") }}
+      <div class="">
+        {{ form.gender(class="form-select", disabled = True) }}
+      </div>
+    </div>
+    <div class="mb-3">
+      {{ form.address.label(class="form-label") }}
+      <div class="">
+        {{ form.address(class="form-control", placeholder="") }}
+      </div>
+    </div>
+    <div class="mb-3">
+      {{ form.salary.label(class="form-label") }}
+      <div class="">
+        {{ form.salary(class="form-control", placeholder="") }}
+      </div>
+    </div>
+    <div class="mb-3">
+      {{ form.dept_id.label(class="form-label") }}
+      <div class="">
+        {{ form.dept_id(class="form-select", placeholder="") }}
+      </div>
+    </div>
+    <div class="mb-3">
+      {{ form.team_id.label(class="form-label") }}
+      <div class="">
+        {{ form.team_id(class="form-select", placeholder="") }}
+      </div>
+    </div>
+    <div>
+      <input
+        class="btn btn-primary"
+        id="submit"
+        name="submit"
+        type="submit"
+        value="Update"
+      />
+    </div>
+  </form>
+  <br />
+  {% if form.errors != {} %}
+  <div class="alert alert-danger" role="alert">{{form.errors}}</div>
+  {% endif %}
+</div>
+{% endblock %}

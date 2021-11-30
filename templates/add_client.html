@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block title %}Add Client{% endblock %} {% block
+body_content %}
+<div
+  class="container w-50 bg-light bg-gradient border border-3 rounded-3"
+  style="margin-top: 30px"
+>
+  <h1>Add New Client</h1>
+  <br />
+  <form action="/add_client" method="post" name="client_form">
+    {{ form.csrf_token }}
+    <div class="mb-3">
+      {{ form.clt_name.label(class="form-label") }}
+      <div class="">{{ form.clt_name(class="form-control") }}</div>
+    </div>
+    <div>
+      <input
+        class="btn btn-primary"
+        id="submit"
+        name="submit"
+        type="submit"
+        value="Add"
+      />
+    </div>
+  </form>
+  <br />
+  {% if form.errors != {} %}
+  <div class="alert alert-danger" role="alert">{{form.errors}}</div>
+  {% endif %}
+</div>
+{% endblock %}

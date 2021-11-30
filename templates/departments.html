@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% block title %}Departments{% endblock %}} {% block
+body_content %}
+
+<div
+  class="container bg-gradient w-auto border border-3 rounded-3 shadow"
+  style="margin-top: 60px; margin-bottom: 60px"
+>
+  {% if depts == [] %}
+  <h1>There are no departments.</h1>
+  {% else %}
+  <h1 style="text-align: center">Departments</h1>
+  <br />
+  <table class="table table-hover" style="text-align: center">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Department Name</th>
+        <th scope="col">Department Location</th>
+        <th scope="col">Department Manager</th>
+        <th scope="col">Employees</th>
+        <th scope="col">Projects</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% set i = namespace(value=1) %} {% for dept in depts %}
+      <tr>
+        <th scope="row">{{ i.value }}</th>
+        <td>{{ dept.dept_name }}</td>
+        <td>{{ dept.dept_location }}</td>
+        {% if dept.mgr_emp %}
+        <td>{{ dept.mgr_emp.f_name + ' ' + dept.mgr_emp.l_name }}</td>
+        {% else %}
+        <td></td>
+        {% endif %}
+        <td>
+          <a href="/departments/{{ dept.dept_id }}/employees">Click Here</a>
+        </td>
+        <td>
+          <a href="/departments/{{ dept.dept_id }}/projects">Click Here</a>
+        </td>
+        <td>
+          <a href="/department/{{ dept.dept_id }}/update">update</a>/<a
+            href="/department/{{ dept.dept_id }}/delete"
+            >delete</a
+          >
+        </td>
+      </tr>
+      {% set i.value = i.value + 1 %} {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endblock %}

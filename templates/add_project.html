@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block title %}Add Project{% endblock %} {% block
+body_content %}
+<div
+  class="container w-50 bg-light bg-gradient border border-3 rounded-3"
+  style="margin-top: 30px"
+>
+  <h1>Add New Project</h1>
+  <br />
+  <form action="/add_project" method="post" name="project_form">
+    {{ form.csrf_token }}
+    <div class="mb-3">
+      {{ form.proj_name.label(class="form-label") }}
+      <div class="">{{ form.proj_name(class="form-control") }}</div>
+    </div>
+    <div class="mb-3">
+      {{ form.proj_descr.label(class="form-label") }}
+      <div class="">{{ form.proj_descr(class="form-control") }}</div>
+    </div>
+    <div class="mb-3">
+      {{ form.clt_id.label(class="form-label") }}
+      <div class="">{{ form.clt_id(class="form-select") }}</div>
+    </div>
+    <div class="mb-3">
+      {{ form.dept_id.label(class="form-label") }}
+      <div class="">{{ form.dept_id(class="form-select") }}</div>
+    </div>
+    <div>
+      <input
+        class="btn btn-primary"
+        id="submit"
+        name="submit"
+        type="submit"
+        value="Add"
+      />
+    </div>
+  </form>
+  <br />
+  {% if form.errors != {} %}
+  <div class="alert alert-danger" role="alert">{{form.errors}}</div>
+  {% endif %}
+</div>
+{% endblock %}
